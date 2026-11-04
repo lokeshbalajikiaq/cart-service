@@ -75,7 +75,7 @@ public class CartServiceImpl implements CartService {
 
         CartItemResponseDto dto = new CartItemResponseDto();
 
-        BeanUtils.copyProperties(dto, cartItem);
+        BeanUtils.copyProperties(cartItem, dto);
 
         return dto;
 
