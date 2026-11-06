@@ -2,6 +2,7 @@ package in.balu.service;
 
 import in.balu.dto.CartItemRequestDto;
 import in.balu.dto.CartItemResponseDto;
+import in.balu.exception.ResourceNotFoundException;
 import in.balu.model.CartItem;
 import in.balu.repository.CartItemRepository;
 import jakarta.transaction.Transactional;
@@ -53,7 +54,8 @@ public class CartServiceImpl implements CartService {
     public CartItemResponseDto updateQuantity(CartItemRequestDto request) {
 
         CartItem cartItem = cartItemRepository.findByUserIdAndProductId(request.getUserId(), request.getProductId())
-                .orElseThrow(() -> new RuntimeException("Item not in the cart"));
+//                .orElseThrow(() -> new RuntimeException("Item not in the cart"));
+                .orElseThrow(() -> new ResourceNotFoundException("Items not in the cart"));
 
         // Not performing any action. Directly setting the quantity
         cartItem.setQuantity(request.getQuantity());
