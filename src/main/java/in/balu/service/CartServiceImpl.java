@@ -2,7 +2,10 @@ package in.balu.service;
 
 import in.balu.dto.CartItemRequestDto;
 import in.balu.dto.CartItemResponseDto;
+import in.balu.dto.UserDto;
 import in.balu.exception.ResourceNotFoundException;
+import in.balu.feignclients.ProductFeignClient;
+import in.balu.feignclients.UserFeignClient;
 import in.balu.model.CartItem;
 import in.balu.repository.CartItemRepository;
 import jakarta.transaction.Transactional;
@@ -19,12 +22,29 @@ public class CartServiceImpl implements CartService {
     @Autowired
     private CartItemRepository cartItemRepository;
 
+    @Autowired
+    private ProductFeignClient productFeignClient;
+
+    @Autowired
+    private UserFeignClient userFeignClient;
+
     @Override
     public CartItemResponseDto addToCart(CartItemRequestDto request) {
 
-        // TODO : Product Services API need to call to fetch Product Information
+        // Product Services API need to call to fetch Product Information
 
-        // TODO : User Service API need to call to Fetch User Details
+        boolean productExists = productFeignClient.isProductExists(request.getProductId());
+
+        if(!productExists) {
+            throw new ResourceNotFoundException("Product Does not exist i DB");
+        }
+
+        // User Service API need to call to Fetch User Details
+
+        UserDto userDto = userFeignClient.fetchUser(request.getUserId().intValue());
+        if(userDto == null) {
+            throw new ResourceNotFoundException("User Does not exist in DB");
+        }
 
         CartItem cartItem = new CartItem();
         BeanUtils.copyProperties(request, cartItem);
