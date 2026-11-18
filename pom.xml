@@ -132,15 +132,16 @@
             <artifactId>spring-cloud-starter-openfeign</artifactId>
         </dependency>
 
+        <!-- Micrometer Brave Bridge -->
         <dependency>
             <groupId>io.micrometer</groupId>
             <artifactId>micrometer-tracing-bridge-brave</artifactId>
         </dependency>
 
+        <!-- Spring Boot 4 Brave Auto Configuration -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-micrometer-tracing-test</artifactId>
-            <scope>test</scope>
+            <artifactId>spring-boot-micrometer-tracing-brave</artifactId>
         </dependency>
 
 
