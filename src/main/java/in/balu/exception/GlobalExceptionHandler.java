@@ -35,6 +35,7 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(errorAPI, HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorAPI> handleException(Exception ex) {
 
         log.error("Internal Server Error {}",ex.getMessage());

@@ -24,6 +24,9 @@ public class CartController {
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
     public CartItemResponseDto addItemToCart(@Valid @RequestBody CartItemRequestDto request) {
+
+        log.info("CartController addItemTocart {}",request.getUserId());
+
         return cartService.addToCart(request);
     }
 
@@ -43,7 +46,7 @@ public class CartController {
 
     }
 
-    @DeleteMapping("/{userId}")
+    @DeleteMapping("/clear/{userId}")
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     public void clearUserCart(@PathVariable Long userId) {
 
