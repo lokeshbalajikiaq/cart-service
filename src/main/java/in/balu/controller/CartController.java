@@ -41,6 +41,8 @@ public class CartController {
     @ResponseStatus(code = HttpStatus.OK)
     public List<CartItemResponseDto> getCartByUserId(@PathVariable Long userId) {
 
+        log.info("CartController getCartByUserId {}",userId);
+
         return cartService.getUserCart(userId);
 
     }
